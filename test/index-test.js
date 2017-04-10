@@ -1,13 +1,9 @@
 import { expect } from 'chai';
 import routesLoader from '../lib';
 
-function build(map) {
-  return routesLoader(() => map);
-}
-
 describe('Acceptance', function() {
   it('handles no matches', function() {
-    let routeLookup = build(function() {});
+    let routeLookup = routesLoader(function() {});
 
     let result = routeLookup('/');
 
@@ -15,7 +11,7 @@ describe('Acceptance', function() {
   });
 
   it('recognizes query params', function() {
-    let routeLookup = build(function() {
+    let routeLookup = routesLoader(function() {
       this.route('single-route');
     });
 
@@ -39,7 +35,7 @@ describe('Acceptance', function() {
 
   describe('single route', function() {
     it('matches', function() {
-      let routeLookup = build(function() {
+      let routeLookup = routesLoader(function() {
         this.route('single-route');
       });
 
@@ -60,7 +56,7 @@ describe('Acceptance', function() {
     });
 
     it('matches a custom path with leading slash', function() {
-      let routeLookup = build(function() {
+      let routeLookup = routesLoader(function() {
         this.route('single-route', { path: '/custom-single-route' });
       });
 
@@ -81,7 +77,7 @@ describe('Acceptance', function() {
     });
 
     it('matches a custom path without leading slash', function() {
-      let routeLookup = build(function() {
+      let routeLookup = routesLoader(function() {
         this.route('single-route', { path: 'custom-single-route' });
       });
 
@@ -102,7 +98,7 @@ describe('Acceptance', function() {
     });
 
     it('matches a custom path with dynamic segment', function() {
-      let routeLookup = build(function() {
+      let routeLookup = routesLoader(function() {
         this.route('single-route', { path: ':dynamic_segment' });
       });
 
@@ -127,7 +123,7 @@ describe('Acceptance', function() {
 
   describe('parent route', function() {
     it('matches', function() {
-      let routeLookup = build(function() {
+      let routeLookup = routesLoader(function() {
         this.route('parent-route', function() {
           this.route('child-route');
         });
@@ -150,7 +146,7 @@ describe('Acceptance', function() {
     });
 
     it('matches a custom path with leading slash', function() {
-      let routeLookup = build(function() {
+      let routeLookup = routesLoader(function() {
         this.route('parent-route', { path: '/custom-route' }, function() {
           this.route('child-route');
         });
@@ -173,7 +169,7 @@ describe('Acceptance', function() {
     });
 
     it('matches a custom path without leading slash', function() {
-      let routeLookup = build(function() {
+      let routeLookup = routesLoader(function() {
         this.route('parent-route', { path: 'custom-route' }, function() {
           this.route('child-route');
         });
@@ -196,7 +192,7 @@ describe('Acceptance', function() {
     });
 
     it('matches a custom path with dynamic segment', function() {
-      let routeLookup = build(function() {
+      let routeLookup = routesLoader(function() {
         this.route('parent-route', { path: ':dynamic_segment' }, function() {
           this.route('child-route');
         });
@@ -223,7 +219,7 @@ describe('Acceptance', function() {
 
   describe('child route', function() {
     it('matches', function() {
-      let routeLookup = build(function() {
+      let routeLookup = routesLoader(function() {
         this.route('parent-route', function() {
           this.route('child-route');
         });
@@ -246,7 +242,7 @@ describe('Acceptance', function() {
     });
 
     it('matches a custom path with leading slash', function() {
-      let routeLookup = build(function() {
+      let routeLookup = routesLoader(function() {
         this.route('parent-route', function() {
           this.route('child-route', { path: '/custom-route' });
         });
@@ -269,7 +265,7 @@ describe('Acceptance', function() {
     });
 
     it('matches a custom path without leading slash', function() {
-      let routeLookup = build(function() {
+      let routeLookup = routesLoader(function() {
         this.route('parent-route', function() {
           this.route('child-route', { path: 'custom-route' });
         });
@@ -292,7 +288,7 @@ describe('Acceptance', function() {
     });
 
     it('matches a custom path with dynamic segment', function() {
-      let routeLookup = build(function() {
+      let routeLookup = routesLoader(function() {
         this.route('parent-route', function() {
           this.route('child-route', { path: ':dynamic_segment' });
         });
