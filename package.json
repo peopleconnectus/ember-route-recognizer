@@ -1,0 +1,46 @@
+{
+  "name": "ember-route-recognizer",
+  "version": "0.0.0",
+  "description": "Resolve Ember.js routes by path in Node.js",
+  "main": "dist/index.js",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "babel lib -d dist",
+    "prepublish": "npm run build",
+    "test": "eslint-mocha --eslint-args=\"lib test\" --mocha-args=\"--compilers js:babel-register test/**/*-test.js\"",
+    "prelint": "eslint --version",
+    "lint": "eslint lib test",
+    "lint:fix": "npm run lint -- --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/peopleconnectus/ember-route-recognizer.git"
+  },
+  "keywords": [
+    "ember.js",
+    "router"
+  ],
+  "author": "Kelly Selden <kellyselden@gmail.com> (https://github.com/kellyselden)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/peopleconnectus/ember-route-recognizer/issues"
+  },
+  "homepage": "https://github.com/peopleconnectus/ember-route-recognizer#readme",
+  "engines": {
+    "node": ">= 4"
+  },
+  "dependencies": {
+    "route-recognizer": "0.2.9"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.0.0",
+    "babel-preset-env": "^1.0.0",
+    "babel-register": "^6.0.0",
+    "chai": "^3.0.0",
+    "eslint": "^3.0.0",
+    "eslint-config-sane": "^0.1.0",
+    "eslint-mocha": "^0.2.0",
+    "mocha": "^3.0.0",
+    "rimraf": "^2.0.0"
+  }
+}
