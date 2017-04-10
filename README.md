@@ -1,5 +1,7 @@
 # ember-route-recognizer
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/peopleconnectus/ember-route-recognizer.svg)](https://greenkeeper.io/)
+
 [![npm version](https://badge.fury.io/js/ember-route-recognizer.svg)](https://badge.fury.io/js/ember-route-recognizer)
 [![Build Status](https://travis-ci.org/peopleconnectus/ember-route-recognizer.svg?branch=master)](https://travis-ci.org/peopleconnectus/ember-route-recognizer)
 [![Build status](https://ci.appveyor.com/api/projects/status/navm4psiytye3ocd/branch/master?svg=true)](https://ci.appveyor.com/project/CM-SiteUI/ember-route-recognizer/branch/master)
