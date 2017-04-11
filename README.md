@@ -44,7 +44,7 @@ export default Router;
 We must first extract just the route map to a new file because we don't want to import all of Ember.js. Create a new file at `app/router-map.js` like this:
 
 ```js
-export default function() {
+exports.routerMap = function() {
   this.route('parent-route', { path: 'custom-route/:dynamic_segment' }, function() {
     this.route('child-route');
   });
@@ -56,7 +56,7 @@ Then our `app/router.js` becomes:
 ```js
 import Ember from 'ember';
 import config from './config/environment';
-import routerMap from './router-map';
+import { routerMap } from './router-map';
 
 const Router = Ember.Router.extend({
   location: config.locationType,
@@ -68,40 +68,23 @@ Router.map(routerMap);
 export default Router;
 ```
 
-Next, we need to get this new `app/router-map.js` into our Node.js server. This can be done a variety of ways, but a git submodule is the most complete solution. Given an Ember.js app named `my-app`, you would run this in your Node.js server directory:
+Next, we need to get this new `app/router-map.js` into our Node.js server. This can be done a variety of ways, but an npm import is the easiest way. Given an Ember.js app named `my-app`, you would run this in your Node.js server directory:
 
 ```sh
-git submodule add -- https://my-git-server/my-app.git my-app
+yarn add git+https://git@my-git-server/my-app.git
 ```
 
-Now we have access to that file in our Node.js project. We assume you have Babel set up in your project because your Ember.js code needs it. Assuming you have an npm build script like this:
+This will add `my-app` to our Node.js server's `package.json`, but your Ember.js app isn't exporting anything yet. Next, create a file at `index.js` in your Ember.js app and add this:
 
 ```js
-{
-  "scripts": {
-    "build": "babel lib -d dist"
-  }
-}
+module.exports = require('./app/router-map');
 ```
 
-We can add the brebuild step:
-
-```js
-{
-  "scripts": {
-    "prebuild": "cp my-app/app/router-map.js lib",
-    "build": "babel lib -d dist"
-  }
-}
-```
-
-And we probably want to add `lib/router-map.js` to our `.gitignore`.
-
-Now, we can finally write the code to consume this file. This code lives at `lib/index.js`:
+Now, we can finally write the code to import `my-app` and consume this file:
 
 ```js
 import emberRouteRecognizer from 'ember-route-recognizer';
-import routerMap from './router-map';
+import { routerMap } from 'my-app';
 
 let routeResolver = emberRouteRecognizer(routerMap);
 
