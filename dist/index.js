@@ -1,7 +1,11 @@
-import RouteRecognizer from 'route-recognizer';
+'use strict';
 
-export default function(routerMap) {
-  let router = new RouteRecognizer();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function (routerMap) {
+  var router = new _routeRecognizer2.default();
 
   function callCallback(callback, parentRoute) {
     callback.call({
@@ -11,16 +15,19 @@ export default function(routerMap) {
     });
   }
 
-  let routeLookup = {};
+  var routeLookup = {};
 
   // for reference https://github.com/emberjs/ember.js/blob/v2.12.0/packages/ember-routing/lib/system/dsl.js#L20
-  function route(name, options = {}, callback) {
+  function route(name) {
+    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    var callback = arguments[2];
+
     if (arguments.length === 2 && typeof options === 'function') {
       callback = options;
       options = {};
     }
 
-    let path;
+    var path = void 0;
     if (options.path) {
       path = options.path;
     } else {
@@ -30,9 +37,10 @@ export default function(routerMap) {
       path = `/${path}`;
     }
 
-    let fullName;
-    let fullPath;
-    let { parentRoute } = this;
+    var fullName = void 0;
+    var fullPath = void 0;
+    var parentRoute = this.parentRoute;
+
     if (parentRoute) {
       fullName = parentRoute.fullName + '.';
       fullPath = parentRoute.fullPath;
@@ -43,7 +51,7 @@ export default function(routerMap) {
     fullName += name;
     fullPath += path;
 
-    let routeObj = {
+    var routeObj = {
       name,
       fullName,
       path,
@@ -59,8 +67,9 @@ export default function(routerMap) {
   }
 
   function alias(aliasRoute, aliasPath, aliasTarget) {
-    let fullName;
-    let { parentRoute } = this;
+    var fullName = void 0;
+    var parentRoute = this.parentRoute;
+
     if (parentRoute) {
       fullName = parentRoute.fullName + '.';
     } else {
@@ -68,8 +77,8 @@ export default function(routerMap) {
     }
     fullName += aliasTarget;
 
-    let callback = routeLookup[fullName];
-    let args = [aliasRoute, { path: aliasPath }];
+    var callback = routeLookup[fullName];
+    var args = [aliasRoute, { path: aliasPath }];
     if (callback) {
       args.push(callback);
     }
@@ -79,7 +88,13 @@ export default function(routerMap) {
 
   callCallback(routerMap);
 
-  return function(path) {
+  return function (path) {
     return router.recognize(path);
   };
-}
+};
+
+var _routeRecognizer = require('route-recognizer');
+
+var _routeRecognizer2 = _interopRequireDefault(_routeRecognizer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
