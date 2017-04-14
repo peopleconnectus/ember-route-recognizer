@@ -30,7 +30,7 @@
     "node": ">= 4"
   },
   "dependencies": {
-    "route-recognizer": "0.2.9"
+    "route-recognizer": "0.3.1"
   },
   "devDependencies": {
     "babel-cli": "^6.0.0",
