@@ -93,7 +93,7 @@ let result = routeResolver('/custom-route/some-variable/child-route?someParam=tr
 console.log(result);
 ```
 
-The result structure comes from [route-recognizer](https://github.com/tildeio/route-recognizer)
+The result structure comes from [route-recognizer](https://github.com/tildeio/route-recognizer).
 
 ```js
 { '0': 
