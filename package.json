@@ -7,7 +7,8 @@
     "prebuild": "rimraf dist",
     "build": "babel lib -d dist",
     "prepublish": "npm run build",
-    "test": "eslint-mocha --eslint-args=\"lib test\" --mocha-args=\"--compilers js:babel-register test/**/*-test.js\"",
+    "test": "mocha --compilers js:babel-register test/**/*-test.js",
+    "posttest": "npm run lint",
     "prelint": "eslint --version",
     "lint": "eslint lib test",
     "lint:fix": "npm run lint -- --fix"
@@ -39,7 +40,6 @@
     "chai": "^4.0.1",
     "eslint": "^3.0.0",
     "eslint-config-sane": "^0.1.0",
-    "eslint-mocha": "^0.2.0",
     "mocha": "^3.0.0",
     "rimraf": "^2.0.0"
   }
