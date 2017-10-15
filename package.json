@@ -7,7 +7,7 @@
     "prebuild": "rimraf dist",
     "build": "babel lib -d dist",
     "prepublish": "npm run build",
-    "test": "mocha --compilers js:babel-register test/**/*-test.js",
+    "test": "mocha --require babel-register test/**/*-test.js",
     "posttest": "npm run lint",
     "prelint": "eslint --version",
     "lint": "eslint lib test",
