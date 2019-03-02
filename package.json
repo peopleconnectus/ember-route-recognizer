@@ -38,7 +38,7 @@
     "babel-preset-env": "^1.0.0",
     "babel-register": "^6.0.0",
     "chai": "^4.0.1",
-    "eslint": "^4.0.0",
+    "eslint": "^5.15.0",
     "eslint-config-peopleconnect": "^2.0.1",
     "eslint-config-sane": "^0.6.0",
     "eslint-plugin-prefer-let": "^1.0.1",
